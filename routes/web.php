@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\UserController; 
+use App\Http\Controllers\UserController;
+
+
 use App\Http\Controllers\CategoryController;
  
 
@@ -32,7 +34,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
 Route::get('/about', function () {
     return '<h1>Profil POS Barokah Mart</h1>
-    <p>Selamat datang di aplikasi kasir Barokah Mart.</p>';
+    <p>Selamat datang di  kasir Barokah Mart.</p>';
 });
 
 // --- RUTE KHUSUS ADMIN ---
