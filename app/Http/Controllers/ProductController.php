@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class ProductController extends Controller
 {
 
     public function index()
-    {
-        // Mengambil produk beserta data kategorinya (Eager Loading)
-        $products = Product::with('category')->get();
+{
+    $products = Product::with('category')->latest()->paginate(10);
+ 
+    return view('master-data.product.index', compact('products'));
+}
 
-        return view('products.index', compact('products'));
-    }
+
 
     public function create()
 {
