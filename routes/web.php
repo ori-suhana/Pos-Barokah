@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\PostController;
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
@@ -38,6 +38,9 @@ Route::get('/about', function () {
     return '<h1>Profil POS Barokah Mart</h1>
     <p>Selamat datang di  kasir Barokah Mart.</p>';
 });
+
+Route::get('/posts', [PostController::class, 'index']);
+Route::post('/posts', [PostController::class, 'store']);
 
 // --- RUTE KHUSUS ADMIN ---
 Route::middleware(['auth', 'role:admin'])->group(function () {
