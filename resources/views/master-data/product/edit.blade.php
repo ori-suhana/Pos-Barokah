@@ -1,4 +1,5 @@
-
+<x-app-layout>
+    <x-card>
 <form action="{{ route('products.update', $product) }}" method="POST" class="space-y-4">
     @csrf
     @method('PUT')
@@ -10,4 +11,5 @@
     <!-- field lain mengikuti pola yang sama -->
     <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md">Simpan Perubahan</button>
 </form>
-
+</x-card>
+</x-app-layout>

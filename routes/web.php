@@ -5,7 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\Product;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
@@ -62,3 +63,11 @@ Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
         return 'Riwayat Transaksi Saya';
     })->name('pos.history');
 });
+
+
+Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
+    Route::get('/pos', [PosController::class, 'index'])->name('pos.index');
+    Route::post('/pos', [PosController::class, 'store'])->name('pos.store');
+    Route::get('/pos/{transaction}/struk', [PosController::class, 'struk'])->name('pos.struk');
+});
+
