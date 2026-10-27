@@ -1,4 +1,3 @@
-
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
@@ -8,9 +7,47 @@
             </a>
         </div>
     </x-slot>
- 
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            
+            <!-- Form Pencarian & Filter -->
+            <form method="GET" action="{{ route('products.index') }}" class="flex flex-wrap gap-3 mb-4 items-center">
+                <!-- Input Cari Nama/Kode -->
+                <input type="text"
+                       name="search"
+                       value="{{ request('search') }}"
+                       placeholder="Cari nama atau kode produk..."
+                       class="flex-1 min-w-[200px] rounded-md border-gray-300 shadow-sm">
+            
+                <!-- Filter Kategori -->
+                <select name="category_id" class="rounded-md border-gray-300 shadow-sm">
+                    <option value="">Semua Kategori</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" @selected(request('category_id') == $category->id)>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <!-- Filter Status Stok (Baru) -->
+                <select name="stock_status" class="rounded-md border-gray-300 shadow-sm">
+                    <option value="">Semua Status Stok</option>
+                    <option value="menipis" @selected(request('stock_status') == 'menipis')>Stok Menipis</option>
+                    <option value="habis" @selected(request('stock_status') == 'habis')>Stok Habis</option>
+                </select>
+
+                <!-- Pilihan Jumlah Data per Halaman (Baru) -->
+                <select name="per_page" class="rounded-md border-gray-300 shadow-sm" onchange="this.form.submit()">
+                    <option value="10" @selected(request('per_page') == 10)>10 / hal</option>
+                    <option value="25" @selected(request('per_page') == 25)>25 / hal</option>
+                    <option value="50" @selected(request('per_page') == 50)>50 / hal</option>
+                </select>
+            
+                <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm">Cari</button>
+                <a href="{{ route('products.index') }}" class="px-4 py-2 text-gray-500 text-sm flex items-center">Reset</a>
+            </form>
+
             <x-card>
                 @if (session('success'))
                     <div class="mb-4 p-3 bg-green-100 text-green-700 rounded-md text-sm">
@@ -73,4 +110,3 @@
         </div>
     </div>
 </x-app-layout>
-
