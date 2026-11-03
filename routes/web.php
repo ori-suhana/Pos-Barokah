@@ -71,3 +71,9 @@ Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
     Route::get('/pos/{transaction}/struk', [PosController::class, 'struk'])->name('pos.struk');
 });
 
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/reports/sales', [ReportController::class, 'sales'])->name('report.sales');
+    Route::get('/reports/sales/export', [ReportController::class, 'export'])->name('report.export');
+});
+
